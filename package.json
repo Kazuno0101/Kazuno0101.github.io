@@ -1,11 +1,12 @@
 {
-	"name": "reactfolio",
+	"homepage": "https://kazuno0101.github.io/",
+	"name": "Kazuno's Portfolio",
 	"version": "1.1.0",
 	"description": "Personal portfolio template built using Reactjs",
 	"author": {
-		"name": "Tharindu N. Madhusanka",
-		"email": "mail@tharindu.dev",
-		"url": "https://tharindu.dev"
+		"name": "Nuno Alwi",
+		"email": "kazunonuno@gamil.com",
+		"url": "https://kazuno0101.github.io/"
 	},
 	"license": "MIT",
 	"private": true,
@@ -27,6 +28,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
@@ -52,5 +55,8 @@
 	"prettier": {
 		"useTabs": true,
 		"tabWidth": 4
+	},
+	"devDependencies": {
+		"gh-pages": "^5.0.0"
 	}
 }
