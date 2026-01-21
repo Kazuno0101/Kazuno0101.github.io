@@ -1,0 +1,25 @@
+[
+	{
+		"id": 1,
+		"title": "SIUNU (NU University System)",
+		"desc": "A unified academic ecosystem for NU Universities across Indonesia. Integrates student admissions, scholarship management, and digital journals into one seamless platform.",
+		"tech": ["Next.js", "Laravel", "Full Stack"],
+		"color": "bg-[#ffcebd]"
+	},
+	{
+		"id": 2,
+		"title": "POSTALSIAR (Gov Datamart)",
+		"desc": "A strategic Datamart for the Ministry of Communication (Komdigi). Visualizes critical data across Postal, Telecommunication, and Broadcasting sectors for state-owned enterprises.",
+		"tech": ["Next.js", "Laravel", "Data Visualization"],
+		"color": "bg-[#cdd5ae]"
+	},
+	{
+		"id": 3,
+		"title": "Tax Decisions Archive",
+		"desc": "An intelligent legal database housing over 90,000 tax decision documents. Features a high-performance deep search engine capable of indexing specific keywords within PDF files.",
+		"tech": ["Next.js", "Laravel", "PDF Indexing"],
+		"image": "/assets/hukumpajak.png",
+		"demo": "https://putusanpajak.id/",
+		"color": "bg-[#57718a]"
+	}
+]

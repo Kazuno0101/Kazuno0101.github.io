@@ -1,14 +1,71 @@
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Roboto:wght@500&display=swap");
-@import "./data/styles.css";
+@import "tailwindcss";
 
-body {
-	margin: 0;
-	font-family: var(--primary-font);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-cream: #fefbea;
+  --color-coffee: #694509;
+  --color-peach: #ffcebd;
+  --color-sage: #cdd5ae;
+  --color-steel: #57718a;
+  --color-ocean: #2e587e;
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-sans: 'Quicksand', sans-serif;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fefbea;
+  color: #694509;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.dark body,
+html.dark body {
+  background-color: #2e587e;
+  color: #fefbea;
+}
+
+html.dark {
+  background-color: #2e587e;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 15s infinite;
 }

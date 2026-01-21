@@ -1,40 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Github, Linkedin, Instagram } from 'lucide-react';
 
-import "./styles/footer.css";
-
-const Footer = () => {
+function Footer() {
 	return (
-		<React.Fragment>
-			<div className="footer">
-				<div className="footer-links">
-					<ul className="footer-nav-link-list">
-						<li className="footer-nav-link-item">
-							<Link to="/">Home</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/about">About</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/projects">Projects</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/articles">Articles</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/contact">Contact</Link>
-						</li>
-					</ul>
+		<footer className="py-8 transition-colors duration-500 border-t bg-cream dark:bg-ocean border-coffee/5 dark:border-cream/5">
+			<div className="max-w-6xl px-6 mx-auto text-center">
+				<div className="flex justify-center gap-6 mb-4">
+					<a
+						href="https://github.com/Kazuno0101"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="transition-colors text-steel dark:text-sage hover:text-coffee dark:hover:text-peach"
+					>
+						<Github size={24} />
+					</a>
+					<a
+						href="https://www.linkedin.com/in/nuno-alwi/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="transition-colors text-steel dark:text-sage hover:text-coffee dark:hover:text-peach"
+					>
+						<Linkedin size={24} />
+					</a>
+					<a
+						href="https://www.instagram.com/kazuno_nuno/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="transition-colors text-steel dark:text-sage hover:text-coffee dark:hover:text-peach"
+					>
+						<Instagram size={24} />
+					</a>
 				</div>
-
-				<div className="footer-credits">
-					<div className="footer-credits-text">
-						© 2023 Tharindu.dev. All Rights Reserved.
-					</div>
-				</div>
+				<p className="text-sm text-steel dark:text-sage">Made with love. 2026</p>
 			</div>
-		</React.Fragment>
+		</footer>
 	);
-};
+}
 
 export default Footer;

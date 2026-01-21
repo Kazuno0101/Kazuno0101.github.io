@@ -1,60 +1,86 @@
-import React, { useEffect } from "react";
+import { motion } from 'framer-motion'
+import { Github, ExternalLink } from 'lucide-react'
+import projects from '../data/projects.json'
 
-import NavBar from "../components/common/navBar";
-import Footer from "../components/common/footer";
-import Logo from "../components/common/logo";
-import AllProjects from "../components/projects/allProjects";
+function Projects() {
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-16">
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="font-serif text-4xl md:text-5xl font-bold text-coffee dark:text-cream mb-12 text-center"
+      >
+        My Work
+      </motion.h1>
 
-import INFO from "../data/user";
+      <div className="grid md:grid-cols-2 gap-8">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 + index * 0.1 }}
+            whileHover={{ y: -10 }}
+            className="bg-white/80 dark:bg-steel/40 border border-sage dark:border-transparent rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all"
+            style={{ animationDelay: `${index * 0.5}s` }}
+          >
+            {project.image ? (
+              <img 
+                src={project.image} 
+                alt={project.title}
+                className="aspect-video w-full object-cover rounded-2xl mb-4"
+              />
+            ) : (
+              <div className="aspect-video bg-sage/30 dark:bg-ocean/50 rounded-2xl mb-4" />
+            )}
+            
+            <h3 className="font-serif text-2xl font-bold text-coffee dark:text-cream mb-2">
+              {project.title}
+            </h3>
+            
+            <p className="text-steel dark:text-sage mb-4">
+              {project.desc}
+            </p>
+            
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.tech.map((tech) => (
+                <span 
+                  key={tech}
+                  className="px-3 py-1 bg-peach/50 dark:bg-peach/20 text-coffee dark:text-cream text-sm rounded-full"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            
+            <div className="flex gap-4">
+              {project.github && (
+                <a 
+                  href={project.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-coffee dark:text-cream hover:text-peach transition-colors"
+                >
+                  <Github size={24} />
+                </a>
+              )}
+              {project.demo && (
+                <a 
+                  href={project.demo} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-coffee dark:text-cream hover:text-peach transition-colors"
+                >
+                  <ExternalLink size={24} />
+                </a>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
-import "./styles/projects.css";
-
-const Projects = () => {
-	useEffect(() => {
-		document.title = `Projects | ${INFO.main.title}`;
-		window.scrollTo(0, 0);
-	}, []);
-
-	return (
-		<React.Fragment>
-			<div className="page-content">
-				<NavBar active="projects" />
-				<div className="content-wrapper">
-					<div className="projects-logo-container">
-						<div className="projects-logo">
-							<Logo width={46} />
-						</div>
-					</div>
-					<div className="projects-container">
-						<div className="title projects-title">
-							Things I’ve made trying to put my dent in the
-							universe.
-						</div>
-
-						<div className="subtitle projects-subtitle">
-							I've worked on a variety of projects over the years
-							and I'm proud of the progress I've made. Many of
-							these projects are open-source and available for
-							others to explore and contribute to. If you're
-							interested in any of the projects I've worked on,
-							please feel free to check out the code and suggest
-							any improvements or enhancements you might have in
-							mind. Collaborating with others is a great way to
-							learn and grow, and I'm always open to new ideas and
-							feedback.
-						</div>
-
-						<div className="projects-list">
-							<AllProjects />
-						</div>
-					</div>
-					<div className="page-footer">
-						<Footer />
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
-	);
-};
-
-export default Projects;
+export default Projects
