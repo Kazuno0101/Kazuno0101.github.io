@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import GitHubContributions from '../components/common/GitHubContributions.jsx';
 
 const skills = [
 	{ name: 'React', icon: '⚛️' },
@@ -58,7 +57,7 @@ function About() {
 						Tech Stack
 					</motion.h2>
 
-					<div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
+					<div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
 						{skills.map((skill, index) => (
 							<motion.div
 								key={skill.name}
@@ -76,25 +75,6 @@ function About() {
 							</motion.div>
 						))}
 					</div>
-
-					{/* GitHub Activity Stats - below tech stack */}
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true, margin: "-50px" }}
-						transition={{ duration: 0.6, delay: 0.4 }}
-					>
-						<motion.h2
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.5, delay: 0.5 }}
-							className="mb-3 font-serif text-xl font-bold text-coffee dark:text-cream"
-						>
-							GitHub Activity
-						</motion.h2>
-						<GitHubContributions username="Kazuno0101" />
-					</motion.div>
 				</div>
 			</div>
 		</div>
