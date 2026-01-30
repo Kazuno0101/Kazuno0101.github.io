@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink, X, ArrowRight } from 'lucide-react'
+import { Github, ExternalLink, X } from 'lucide-react'
 import projects from '../data/projects.json'
 
 function Projects() {
@@ -83,7 +83,7 @@ function Projects() {
       <div className="relative flex-1 flex items-center">
         <div 
           ref={scrollContainerRef}
-          className="flex gap-8 overflow-x-auto overflow-y-hidden px-8 md:px-16 lg:px-24 py-4 scrollbar-hide"
+          className="flex gap-8 overflow-x-auto overflow-y-hidden px-8 md:px-16 lg:px-24 py-6 scrollbar-hide"
           style={{ 
             scrollbarWidth: 'none', 
             msOverflowStyle: 'none',
@@ -100,61 +100,80 @@ function Projects() {
               onClick={() => openModal(project)}
               className="flex-shrink-0 cursor-pointer group"
             >
-              <div 
-                className={`relative w-[300px] sm:w-[340px] md:w-[380px] h-[420px] sm:h-[460px] rounded-2xl overflow-hidden ${project.color || 'bg-sage/30'} transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2`}
-              >
-                {/* Background image */}
-                {project.image && (
+              {/* Card with subtle notebook feel */}
+              <div className="relative w-[300px] sm:w-[340px] md:w-[360px]">
+                {/* Main card */}
+                <div 
+                  className="relative bg-cream dark:bg-slate-800 rounded-xl overflow-hidden transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2 dark:border dark:border-slate-700"
+                  style={{
+                    boxShadow: '0 4px 20px rgba(105, 69, 9, 0.08)',
+                  }}
+                >
+                  {/* Subtle top accent bar using project color - with glow in dark mode */}
                   <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-500"
-                    style={{ backgroundImage: `url(${project.image})` }}
+                    className={`h-1.5 w-full ${project.color || 'bg-sage'}`}
+                    style={{
+                      boxShadow: 'var(--tw-shadow, none)',
+                    }}
                   />
-                )}
+                  {/* Glow effect for dark mode */}
+                  <div 
+                    className={`absolute top-0 left-0 right-0 h-8 opacity-0 dark:opacity-30 blur-xl ${project.color || 'bg-sage'}`}
+                  />
 
-                {/* Content */}
-                <div className="relative h-full p-6 md:p-8 flex flex-col justify-between">
-                  {/* Top */}
-                  <div>
-                    {/* Number */}
-                    <span className="text-sm font-medium text-slate-500 dark:text-slate-600 mb-4 block">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                  {/* Content */}
+                  <div className="relative p-6 md:p-7">
+                    {/* Header with number */}
+                    <div className="flex items-start justify-between mb-4">
+                      <span className="text-xs font-medium text-steel/50 dark:text-cream/50 tracking-wider">
+                        PROJECT {String(index + 1).padStart(2, '0')}
+                      </span>
+                      {/* Decorative dot - with subtle glow in dark mode */}
+                      <div 
+                        className={`w-2.5 h-2.5 rounded-full ${project.color || 'bg-sage'}`}
+                        style={{
+                          boxShadow: document.documentElement.classList.contains('dark') 
+                            ? `0 0 8px 2px currentColor` 
+                            : 'none',
+                        }}
+                      />
+                    </div>
                     
                     {/* Title */}
-                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-slate-800 mb-4 leading-tight">
+                    <h3 className="font-serif text-xl md:text-2xl font-bold text-coffee dark:text-cream mb-3 leading-snug">
                       {project.title}
                     </h3>
 
+                    {/* Subtle divider */}
+                    <div className="w-12 h-px bg-coffee/20 dark:bg-cream/20 mb-4" />
+
                     {/* Description */}
-                    <p className="text-slate-600 text-sm md:text-base leading-relaxed line-clamp-3">
+                    <p className="text-steel dark:text-sage text-sm leading-relaxed mb-5 line-clamp-3">
                       {project.desc}
                     </p>
-                  </div>
 
-                  {/* Bottom */}
-                  <div>
                     {/* Tech tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 mb-5">
                       {project.tech.map((tech) => (
                         <span 
                           key={tech}
-                          className="px-3 py-1 bg-white/50 dark:bg-white/60 text-slate-700 text-xs font-medium rounded-full"
+                          className="px-2.5 py-1 bg-sage/20 dark:bg-sage/10 text-coffee dark:text-sage text-xs font-medium rounded-md"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                     
-                    {/* Links & CTA */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex gap-3">
+                    {/* Footer */}
+                    <div className="flex items-center pt-2 border-t border-coffee/10 dark:border-cream/10">
+                      <div className="flex gap-2">
                         {project.github && (
                           <a 
                             href={project.github} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="p-2.5 bg-white/60 hover:bg-white rounded-full text-slate-600 hover:text-slate-800 transition-all"
+                            className="p-2 hover:bg-sage/20 dark:hover:bg-sage/10 rounded-lg text-steel dark:text-sage hover:text-coffee dark:hover:text-cream transition-all"
                           >
                             <Github size={18} />
                           </a>
@@ -165,20 +184,12 @@ function Projects() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-full text-white transition-all"
+                            className="p-2 hover:bg-peach/30 dark:hover:bg-peach/20 rounded-lg text-steel dark:text-sage hover:text-coffee dark:hover:text-cream transition-all"
                           >
                             <ExternalLink size={18} />
                           </a>
                         )}
                       </div>
-                      
-                      {/* View details */}
-                      <motion.div 
-                        className="flex items-center gap-2 text-slate-500 text-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        <span>View details</span>
-                        <ArrowRight size={14} />
-                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -198,55 +209,56 @@ function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-coffee/30 dark:bg-ocean/50 backdrop-blur-sm"
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
               onClick={(e) => e.stopPropagation()}
-              className={`relative w-full max-w-xl rounded-2xl overflow-hidden ${selectedProject.color || 'bg-cream'} shadow-2xl`}
+              className="relative w-full max-w-lg bg-cream dark:bg-slate-800 rounded-xl overflow-hidden shadow-2xl dark:border dark:border-slate-700"
             >
+              {/* Top accent bar - with glow in dark mode */}
+              <div className={`h-2 w-full ${selectedProject.color || 'bg-sage'}`} />
+              <div 
+                className={`absolute top-0 left-0 right-0 h-10 opacity-0 dark:opacity-25 blur-xl ${selectedProject.color || 'bg-sage'}`}
+              />
+
               {/* Close button */}
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 z-10 p-2 bg-white/80 hover:bg-white rounded-full transition-colors"
+                className="absolute top-5 right-4 z-10 p-2 hover:bg-coffee/10 dark:hover:bg-cream/10 rounded-lg transition-colors"
               >
-                <X size={18} className="text-slate-600" />
+                <X size={18} className="text-steel dark:text-sage" />
               </button>
 
-              {/* Background image */}
-              {selectedProject.image && (
-                <div 
-                  className="absolute inset-0 bg-cover bg-center opacity-15"
-                  style={{ backgroundImage: `url(${selectedProject.image})` }}
-                />
-              )}
-
               {/* Content */}
-              <div className="relative p-8 md:p-10">
-                {/* Number */}
-                <span className="text-sm font-medium text-slate-500 mb-4 block">
-                  Project {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')}
+              <div className="relative p-7 md:p-8">
+                {/* Header */}
+                <span className="text-xs font-medium text-steel/50 dark:text-cream/50 tracking-wider mb-3 block">
+                  PROJECT {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')}
                 </span>
 
-                <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800 mb-4">
+                <h2 className="font-serif text-2xl md:text-3xl font-bold text-coffee dark:text-cream mb-3 pr-8">
                   {selectedProject.title}
                 </h2>
 
-                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                {/* Divider */}
+                <div className="w-16 h-px bg-coffee/20 dark:bg-cream/20 mb-5" />
+
+                <p className="text-steel dark:text-sage text-base leading-relaxed mb-6">
                   {selectedProject.desc}
                 </p>
 
                 {/* Tech */}
-                <div className="mb-8">
-                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Technologies</h4>
+                <div className="mb-6">
+                  <h4 className="text-xs font-semibold text-steel/60 dark:text-cream/50 uppercase tracking-wider mb-3">Tech Stack</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.tech.map((tech) => (
                       <span 
                         key={tech}
-                        className="px-3 py-1.5 bg-white/60 text-slate-700 text-sm font-medium rounded-full"
+                        className="px-3 py-1.5 bg-sage/20 dark:bg-sage/10 text-coffee dark:text-sage text-sm font-medium rounded-md"
                       >
                         {tech}
                       </span>
@@ -255,13 +267,13 @@ function Projects() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 pt-4 border-t border-coffee/10 dark:border-cream/10">
                   {selectedProject.github && (
                     <a 
                       href={selectedProject.github} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-white/70 hover:bg-white rounded-full text-slate-700 transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 px-4 py-2.5 bg-coffee/5 dark:bg-cream/5 hover:bg-coffee/10 dark:hover:bg-cream/10 rounded-lg text-coffee dark:text-cream transition-colors text-sm font-medium"
                     >
                       <Github size={16} />
                       <span>View Code</span>
@@ -272,7 +284,7 @@ function Projects() {
                       href={selectedProject.demo} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-full text-white transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 px-4 py-2.5 bg-coffee dark:bg-peach hover:bg-coffee/90 dark:hover:bg-peach/90 rounded-lg text-cream dark:text-coffee transition-colors text-sm font-medium"
                     >
                       <ExternalLink size={16} />
                       <span>Live Demo</span>
