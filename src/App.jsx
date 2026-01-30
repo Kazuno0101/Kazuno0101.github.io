@@ -1,29 +1,49 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import Navbar from './components/common/Navbar.jsx'
 import Footer from './components/common/Footer.jsx'
 import AnimatedBackground from './components/common/AnimatedBackground.jsx'
-import PageWrapper from './components/layout/PageWrapper.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Projects from './pages/Projects.jsx'
 import Contact from './pages/Contact.jsx'
 
-function App() {
-  const location = useLocation()
+function ParallaxSection({ children, id, offset = 50 }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  })
+  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset])
 
   return (
-    <div className="min-h-screen bg-cream dark:bg-ocean transition-colors duration-500">
+    <section id={id} ref={ref}>
+      <motion.div style={{ y }}>
+        {children}
+      </motion.div>
+    </section>
+  )
+}
+
+function App() {
+  return (
+    <div className="min-h-screen bg-cream dark:bg-ocean transition-colors duration-500 overflow-x-hidden">
       <AnimatedBackground />
       <Navbar />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-          <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-          <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-        </Routes>
-      </AnimatePresence>
+      <main className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+        <section id="home">
+          <Home />
+        </section>
+        <ParallaxSection id="about" offset={40}>
+          <About />
+        </ParallaxSection>
+        <ParallaxSection id="projects" offset={30}>
+          <Projects />
+        </ParallaxSection>
+        <ParallaxSection id="contact" offset={20}>
+          <Contact />
+        </ParallaxSection>
+      </main>
       <Footer />
     </div>
   )

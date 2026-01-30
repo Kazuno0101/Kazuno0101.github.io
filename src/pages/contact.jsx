@@ -17,17 +17,24 @@ function Contact() {
 	};
 
 	return (
-		<div className="max-w-2xl px-4 sm:px-6 py-12 sm:py-16 mx-auto">
+		<div className="max-w-2xl py-12 sm:py-16 mx-auto">
 			<motion.h1
 				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.2 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-100px" }}
+				transition={{ duration: 0.6 }}
 				className="mb-6 font-serif text-3xl sm:text-4xl font-bold text-center md:text-5xl text-coffee dark:text-cream"
 			>
 				Let's make something amazing together.
 			</motion.h1>
 
-			<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
+			<motion.div 
+				initial={{ opacity: 0, y: 20 }} 
+				whileInView={{ opacity: 1, y: 0 }} 
+				viewport={{ once: true, margin: "-100px" }}
+				transition={{ duration: 0.5, delay: 0.1 }} 
+				className="flex justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
+			>
 				<motion.a
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}
@@ -62,8 +69,9 @@ function Contact() {
 
 			<motion.button
 				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.4 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-100px" }}
+				transition={{ duration: 0.5, delay: 0.2 }}
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
 				onClick={copyEmail}
@@ -73,7 +81,14 @@ function Contact() {
 				Copy Email
 			</motion.button>
 
-			<motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} onSubmit={handleSubmit} className="space-y-6">
+			<motion.form 
+				initial={{ opacity: 0, y: 20 }} 
+				whileInView={{ opacity: 1, y: 0 }} 
+				viewport={{ once: true, margin: "-100px" }}
+				transition={{ duration: 0.5, delay: 0.3 }} 
+				onSubmit={handleSubmit} 
+				className="space-y-6"
+			>
 				<input
 					type="text"
 					placeholder="Your Name"

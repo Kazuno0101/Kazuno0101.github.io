@@ -1,27 +1,37 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle.jsx'
 
 function Navbar() {
-  const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/projects', label: 'Work' },
-    { path: '/contact', label: 'Say Hi' },
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Work' },
+    { id: 'contact', label: 'Say Hi' },
   ]
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      const offset = 40
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' })
+      setActiveSection(id)
+    }
+    closeMenu()
+  }
+
   return (
     <nav className="sticky top-0 z-50 bg-cream/80 dark:bg-ocean/80 backdrop-blur-md border-b border-coffee/5 dark:border-cream/5 transition-colors duration-500">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-        <Link to="/" onClick={closeMenu}>
+        <button onClick={() => scrollToSection('home')}>
           <motion.div 
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -30,24 +40,24 @@ function Navbar() {
           >
             <span className="font-serif font-bold text-lg text-coffee dark:text-cream">K</span>
           </motion.div>
-        </Link>
+        </button>
         
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
-            <li key={link.path}>
-              <Link 
-                to={link.path}
+            <li key={link.id}>
+              <button 
+                onClick={() => scrollToSection(link.id)}
                 className="relative text-coffee dark:text-cream hover:text-peach dark:hover:text-peach transition-colors"
               >
                 {link.label}
-                {location.pathname === link.path && (
+                {activeSection === link.id && (
                   <motion.div
                     layoutId="underline"
                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-peach dark:bg-peach"
                   />
                 )}
-              </Link>
+              </button>
             </li>
           ))}
           <li>
@@ -80,18 +90,17 @@ function Navbar() {
           >
             <ul className="flex flex-col py-4">
               {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link 
-                    to={link.path}
-                    onClick={closeMenu}
-                    className={`block px-6 py-3 text-lg transition-colors ${
-                      location.pathname === link.path 
+                <li key={link.id}>
+                  <button 
+                    onClick={() => scrollToSection(link.id)}
+                    className={`block w-full text-left px-6 py-3 text-lg transition-colors ${
+                      activeSection === link.id 
                         ? 'text-peach bg-peach/10' 
                         : 'text-coffee dark:text-cream hover:text-peach hover:bg-peach/5'
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Button from '../components/common/Button.jsx';
 
 function Home() {
+	const scrollToProjects = () => {
+		const element = document.getElementById('projects');
+		if (element) {
+			const offset = 40;
+			const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+			window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+		}
+	};
+
 	return (
-		<div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 sm:px-6">
+		<div className="min-h-[80vh] flex flex-col items-center justify-center text-center">
 			<motion.div
 				initial={{ scale: 0 }}
 				animate={{ scale: 1 }}
@@ -33,9 +41,7 @@ function Home() {
 			</motion.div>
 
 			<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-				<Link to="/projects">
-					<Button>View My Work</Button>
-				</Link>
+				<Button onClick={scrollToProjects}>View My Work</Button>
 			</motion.div>
 		</div>
 	);
