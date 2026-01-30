@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Navbar from './components/common/Navbar.jsx'
 import Footer from './components/common/Footer.jsx'
-import AnimatedBackground from './components/common/AnimatedBackground.jsx'
+import ParallaxHero from './components/common/ParallaxHero.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Projects from './pages/Projects.jsx'
@@ -28,12 +28,17 @@ function ParallaxSection({ children, id, offset = 50 }) {
 function App() {
   return (
     <div className="min-h-screen bg-cream dark:bg-ocean transition-colors duration-500 overflow-x-hidden">
-      <AnimatedBackground />
       <Navbar />
-      <main className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-20">
-        <section id="home">
+      
+      {/* Hero with Parallax Background */}
+      <section id="home">
+        <ParallaxHero>
           <Home />
-        </section>
+        </ParallaxHero>
+      </section>
+
+      {/* Rest of content */}
+      <main className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 bg-cream dark:bg-ocean relative z-10">
         <ParallaxSection id="about" offset={40}>
           <About />
         </ParallaxSection>
