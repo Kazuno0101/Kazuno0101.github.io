@@ -30,7 +30,7 @@ function App() {
     <div className="min-h-screen bg-cream dark:bg-ocean transition-colors duration-500 overflow-x-hidden">
       <AnimatedBackground />
       <Navbar />
-      <main className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+      <main className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-20">
         <section id="home">
           <Home />
         </section>
