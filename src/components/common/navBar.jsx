@@ -16,24 +16,23 @@ function Navbar() {
   ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') || 'home'
+      setActiveSection(hash)
+      setIsScrolled(hash !== 'home')
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 100
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY
-      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' })
-      setActiveSection(id)
-    }
+    window.location.hash = id
+    setActiveSection(id)
     closeMenu()
   }
 

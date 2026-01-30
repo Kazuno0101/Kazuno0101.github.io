@@ -69,3 +69,64 @@ html.dark {
 .animate-blob {
   animation: blob 15s infinite;
 }
+
+/* Fullpage.js navigation styling */
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+  background: #694509 !important;
+  width: 10px !important;
+  height: 10px !important;
+  margin: -5px 0 0 -5px !important;
+  transition: all 0.3s ease !important;
+}
+
+html.dark #fp-nav ul li a span,
+html.dark .fp-slidesNav ul li a span {
+  background: #cdd5ae !important;
+}
+
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span {
+  width: 14px !important;
+  height: 14px !important;
+  margin: -7px 0 0 -7px !important;
+  background: #ffcebd !important;
+}
+
+html.dark #fp-nav ul li a.active span,
+html.dark .fp-slidesNav ul li a.active span {
+  background: #ffcebd !important;
+}
+
+#fp-nav ul li .fp-tooltip {
+  font-family: 'Quicksand', sans-serif;
+  color: #694509;
+  background: rgba(254, 251, 234, 0.95);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+html.dark #fp-nav ul li .fp-tooltip {
+  color: #fefbea;
+  background: rgba(87, 113, 138, 0.95);
+}
+
+.fp-watermark {
+  display: none !important;
+}
+
+/* Fullpage section backgrounds */
+.fp-section {
+  background: transparent;
+}
+
+html.dark .fp-section {
+  background: transparent;
+}
+
+/* Disable scroll on contact section */
+.fp-noscroll .fp-overflow {
+  overflow: hidden !important;
+}
