@@ -44,7 +44,7 @@ function Contact() {
 			</motion.p>
 
 			<motion.a
-				href="mailto:hello@example.com"
+				href="mailto:kazunonuno@gmail.com"
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, margin: "-100px" }}
@@ -54,7 +54,7 @@ function Contact() {
 				className="inline-flex items-center gap-3 px-8 py-4 mb-12 text-lg font-medium rounded-2xl bg-coffee dark:bg-peach text-cream dark:text-coffee shadow-lg hover:shadow-xl transition-shadow"
 			>
 				<Mail size={22} />
-				hello@example.com
+				kazunonuno@gmail.com
 			</motion.a>
 
 			<motion.div
