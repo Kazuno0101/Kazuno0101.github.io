@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle.jsx'
@@ -6,6 +6,7 @@ import ThemeToggle from './ThemeToggle.jsx'
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [isScrolled, setIsScrolled] = useState(false)
   
   const navLinks = [
     { id: 'home', label: 'Home' },
@@ -14,13 +15,21 @@ function Navbar() {
     { id: 'contact', label: 'Say Hi' },
   ]
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
-      const offset = 40
+      const offset = 80
       const elementPosition = element.getBoundingClientRect().top + window.scrollY
       window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' })
       setActiveSection(id)
@@ -29,8 +38,18 @@ function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-cream/80 dark:bg-ocean/80 backdrop-blur-md border-b border-coffee/5 dark:border-cream/5 transition-colors duration-500">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <motion.nav 
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'mx-4 sm:mx-8 mt-4 rounded-2xl bg-cream/90 dark:bg-ocean/90 backdrop-blur-lg shadow-lg border border-coffee/10 dark:border-cream/10' 
+          : 'bg-cream/80 dark:bg-ocean/80 backdrop-blur-md border-b border-coffee/5 dark:border-cream/5'
+      }`}
+      initial={false}
+      animate={{
+        borderRadius: isScrolled ? 16 : 0,
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
         <button onClick={() => scrollToSection('home')}>
           <motion.div 
             whileHover={{ scale: 1.1 }}
@@ -86,7 +105,11 @@ function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-cream/95 dark:bg-ocean/95 backdrop-blur-md border-t border-coffee/5 dark:border-cream/5"
+            className={`md:hidden overflow-hidden ${
+              isScrolled 
+                ? 'bg-cream/95 dark:bg-ocean/95' 
+                : 'bg-cream/95 dark:bg-ocean/95 border-t border-coffee/5 dark:border-cream/5'
+            }`}
           >
             <ul className="flex flex-col py-4">
               {navLinks.map((link) => (
@@ -107,7 +130,7 @@ function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   )
 }
 
