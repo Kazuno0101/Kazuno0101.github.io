@@ -38,32 +38,69 @@ function Navbar() {
   }
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'px-4 sm:px-8 py-3' : 'px-0 py-0'
-    }`}>
+    <motion.div 
+      className="fixed top-0 left-0 right-0 z-50"
+      initial={false}
+      animate={{
+        padding: isScrolled ? '12px 16px' : '0px',
+      }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+    >
       <motion.nav 
-        className={`transition-all duration-500 ${
-          isScrolled 
-            ? 'max-w-4xl mx-auto rounded-full bg-cream/95 dark:bg-ocean/95 backdrop-blur-xl shadow-xl border border-coffee/10 dark:border-cream/10' 
-            : 'bg-cream/80 dark:bg-ocean/80 backdrop-blur-md border-b border-coffee/5 dark:border-cream/5'
-        }`}
-        layout
+        className="backdrop-blur-xl"
+        initial={false}
+        animate={{
+          maxWidth: isScrolled ? '56rem' : '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          borderRadius: isScrolled ? 9999 : 0,
+          backgroundColor: isScrolled 
+            ? 'rgba(var(--color-cream-rgb, 250 247 240) / 0.95)' 
+            : 'rgba(var(--color-cream-rgb, 250 247 240) / 0.8)',
+          boxShadow: isScrolled 
+            ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)' 
+            : 'none',
+          borderWidth: isScrolled ? '1px' : '0px',
+          borderBottomWidth: isScrolled ? '1px' : '1px',
+        }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        style={{
+          borderColor: 'rgba(74, 60, 49, 0.1)',
+        }}
       >
-        <div className={`flex justify-between items-center transition-all duration-500 ${
-          isScrolled ? 'max-w-4xl mx-auto px-6 py-2' : 'max-w-6xl mx-auto px-4 sm:px-6 py-4'
-        }`}>
+        <motion.div 
+          className="flex justify-between items-center"
+          initial={false}
+          animate={{
+            paddingLeft: isScrolled ? '24px' : '16px',
+            paddingRight: isScrolled ? '24px' : '16px',
+            paddingTop: isScrolled ? '8px' : '16px',
+            paddingBottom: isScrolled ? '8px' : '16px',
+          }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        >
           <button onClick={() => scrollToSection('home')}>
             <motion.div 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className={`rounded-full border-2 border-coffee dark:border-cream flex items-center justify-center transition-all duration-500 ${
-                isScrolled ? 'w-8 h-8' : 'w-10 h-10'
-              }`}
+              className="rounded-full border-2 border-coffee dark:border-cream flex items-center justify-center"
+              initial={false}
+              animate={{
+                width: isScrolled ? 32 : 40,
+                height: isScrolled ? 32 : 40,
+              }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             >
-              <span className={`font-serif font-bold text-coffee dark:text-cream transition-all duration-500 ${
-                isScrolled ? 'text-sm' : 'text-lg'
-              }`}>K</span>
+              <motion.span 
+                className="font-serif font-bold text-coffee dark:text-cream"
+                initial={false}
+                animate={{
+                  fontSize: isScrolled ? '14px' : '18px',
+                }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
+                K
+              </motion.span>
             </motion.div>
           </button>
           
@@ -71,20 +108,24 @@ function Navbar() {
           <ul className="hidden md:flex gap-6 items-center">
             {navLinks.map((link) => (
               <li key={link.id}>
-                <button 
+                <motion.button 
                   onClick={() => scrollToSection(link.id)}
-                  className={`relative text-coffee dark:text-cream hover:text-peach dark:hover:text-peach transition-all duration-300 ${
-                    isScrolled ? 'text-sm' : 'text-base'
-                  }`}
+                  className="relative text-coffee dark:text-cream hover:text-peach dark:hover:text-peach"
+                  initial={false}
+                  animate={{
+                    fontSize: isScrolled ? '14px' : '16px',
+                  }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                 >
                   {link.label}
                   {activeSection === link.id && (
                     <motion.div
                       layoutId="underline"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-peach dark:bg-peach"
+                      transition={{ duration: 0.3 }}
                     />
                   )}
-                </button>
+                </motion.button>
               </li>
             ))}
             <li>
@@ -103,7 +144,7 @@ function Navbar() {
               {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -112,10 +153,8 @@ function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`md:hidden overflow-hidden ${
-                isScrolled ? 'rounded-b-3xl' : ''
-              }`}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="md:hidden overflow-hidden"
             >
               <ul className="flex flex-col py-2">
                 {navLinks.map((link) => (
@@ -137,7 +176,7 @@ function Navbar() {
           )}
         </AnimatePresence>
       </motion.nav>
-    </div>
+    </motion.div>
   )
 }
 
