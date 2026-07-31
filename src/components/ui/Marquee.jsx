@@ -35,10 +35,12 @@ export default function Marquee({
     let last = performance.now()
     let half = 0
     let raf = 0
+    let measureCount = 0
 
     // Measure half-width (one full copy of items).
     const measure = () => {
-      half = track.scrollWidth / 2
+      const newHalf = track.scrollWidth / 2
+      if (newHalf > 0) half = newHalf
     }
     measure()
 
@@ -46,6 +48,10 @@ export default function Marquee({
     ro.observe(track)
 
     const tick = (now) => {
+      // Re-measure periodically to catch layout changes
+      measureCount++
+      if (measureCount % 30 === 0) measure()
+
       const dt = Math.min(64, now - last) / 1000
       last = now
 

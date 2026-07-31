@@ -1,30 +1,27 @@
-// Edit isi ini untuk mengganti konten portfolio.
-// Semua field sudah diberi contoh realistis, ganti dengan data kamu sendiri.
-
 export const profile = {
   name: 'Nuno Alwi',
   role: 'Frontend Developer',
-  tagline: 'Membangun antarmuka web yang cepat, rapi, dan mudah dirawat dengan React & TypeScript.',
+  tagline: 'Web yang cepat, rapi, dan enak dipakai. React & TypeScript.',
   location: 'Bandung, ID',
-  email: 'halo@kazuno.dev',
+  email: 'kazunonuno@gmail.com',
   socials: [
     { label: 'GitHub', url: 'https://github.com/kazuno0101' },
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/username' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/nunoalwi' },
   ],
   resumeUrl: '#',
 }
 
 export const about = {
   prompt: '$ whoami',
-  headline: 'Saya bangun antarmuka yang cepat dirilis, nyaman dipakai, dan mudah dirawat tim.',
+  headline: 'Antarmuka yang bikin pengguna betah.',
   body: [
-    'Berpengalaman membangun aplikasi web end-to-end, dari antarmuka hingga API. Saya lebih suka solusi sederhana ketika bisa, dan selalu menjaga performa serta aksesibilitas.',
-    'Saat ini fokus di ekosistem React, TypeScript, dan Node.js. Terbuka untuk proyek freelance, kolaborasi, atau kontribusi open-source.',
+    'Frontend developer yang peduli detail — dari spacing yang pas sampai performance score yang hijau. Saya bikin kode bukan cuma buat mesin, tapi juga buat developer lain yang bakal baca.',
+    'Main di React, TypeScript, dan Node.js sehari-hari. Terbuka untuk freelance, kolaborasi, atau obrolan soal web dev.',
   ],
   experience: [
-    { year: '2024 — sekarang', role: 'Frontend Developer', org: 'PT Contoh Digital', description: 'Membangun dashboard analytics dan komponen design system untuk produk internal. Menggunakan React, TypeScript, dan Tailwind CSS.' },
-    { year: '2022 — 2024', role: 'Full-stack Developer', org: 'Startup Anonim', description: 'Mengembangkan platform marketplace dari nol hingga 10K+ pengguna aktif. Stack: Next.js, Express, PostgreSQL.' },
-    { year: '2020 — 2022', role: 'Web Developer', org: 'Studio Mandiri', description: 'Menangani 20+ proyek klien mulai dari landing page hingga aplikasi web kompleks. Fokus pada performa dan aksesibilitas.' },
+    { year: '2024 — sekarang', role: 'Frontend Developer', org: 'PT Contoh Digital', description: 'Dashboard analytics dan design system untuk produk internal. Dipakai ratusan karyawan setiap hari.' },
+    { year: '2022 — 2024', role: 'Full-stack Developer', org: 'Startup Anonim', description: 'Marketplace dari nol sampai 10K+ pengguna aktif. Product page, payment gateway, sampai dashboard seller.' },
+    { year: '2020 — 2022', role: 'Web Developer', org: 'Studio Mandiri', description: '20+ proyek klien — dari landing page sampai web app kompleks. Fokus di performa dan aksesibilitas.' },
   ],
 }
 
@@ -32,7 +29,7 @@ export const projects = [
   {
     id: '01',
     title: 'Aplikasi Antrian Realtime',
-    description: 'Mengurangi waktu tunggu pasien 40% lewat sistem antrian realtime berbasis WebSocket untuk klinik.',
+    description: 'Sistem antrian klinik berbasis WebSocket. Waktu tunggu pasien turun 40%.',
     tech: ['React', 'Node.js', 'WebSocket', 'PostgreSQL'],
     category: 'web',
     demo: '#',
@@ -41,7 +38,7 @@ export const projects = [
   {
     id: '02',
     title: 'Dashboard Analitik IoT',
-    description: 'Mempermudah pemantauan ribuan perangkat IoT lewat dashboard analitik dengan filter waktu dan export laporan.',
+    description: 'Pantau ribuan perangkat IoT. Filter per waktu, lihat tren, export laporan.',
     tech: ['TypeScript', 'Next.js', 'TimescaleDB', 'Chart.js'],
     category: 'data',
     demo: '#',
@@ -50,7 +47,7 @@ export const projects = [
   {
     id: '03',
     title: 'Marketplace UMKM',
-    description: 'Mendigitalkan UMKM lokal lewat marketplace siap pakai dengan payment gateway dan logistik terintegrasi.',
+    description: 'Platform jualan online untuk UMKM lokal. Payment gateway dan logistik terintegrasi.',
     tech: ['React', 'Express', 'MySQL', 'Midtrans'],
     category: 'web',
     demo: '#',
@@ -59,7 +56,7 @@ export const projects = [
   {
     id: '04',
     title: 'CLI Catatan Cepat',
-    description: 'Mencatat ide dalam hitungan detik dari terminal dengan tag, pencarian fuzzy, dan sync otomatis ke Git.',
+    description: 'Catat ide dari terminal dalam detik. Tag, pencarian fuzzy, auto-sync ke Git.',
     tech: ['Go', 'Cobra', 'SQLite'],
     category: 'tool',
     demo: '#',
@@ -68,7 +65,7 @@ export const projects = [
   {
     id: '05',
     title: 'Game Edukasi Anak',
-    description: 'Membuat belajar matematika dasar menyenangkan lewat mini-game web offline-first berbasis PWA.',
+    description: 'Mini-game matematika offline-first berbasis PWA. Belajar sambil main.',
     tech: ['Vue', 'Vite', 'PWA'],
     category: 'web',
     demo: '#',
@@ -77,7 +74,7 @@ export const projects = [
   {
     id: '06',
     title: 'API Public Cuaca',
-    description: 'Data cuaca dari banyak provider dalam satu API ringan, cepat, dan ter-rate-limit.',
+    description: 'Satu endpoint, banyak provider. Ringan, ter-cache, dan ter-rate-limit.',
     tech: ['Fastify', 'Redis', 'Docker'],
     category: 'api',
     demo: '#',
@@ -113,11 +110,11 @@ export const skills = {
 
 export const contact = {
   prompt: '$ contact',
-  headline: 'Punya ide atau proyek? Mari kita wujudkan bareng.',
-  email: 'halo@kazuno.dev',
+  headline: 'Punya proyek? Yuk, ngobrol.',
+  email: 'kazunonuno@gmail.com',
   socials: [
     { label: 'GitHub', url: 'https://github.com/kazuno0101' },
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/username' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/nunoalwi' },
   ],
 }
 

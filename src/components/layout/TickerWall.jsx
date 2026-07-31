@@ -3,20 +3,20 @@ import Marquee from '../ui/Marquee.jsx'
 
 // Two-row ticker wall between Projects and Skills.
 const facts = [
-  'KAFFEIN-DRIVEN',
-  'KEYBOARD MECHANIKAL',
-  'TIDUR 6 JAM',
-  'KOMITMEN 100%',
-  'DOKUMENTASI RAPI',
-  'DEPLOY TIAP JUMAT',
+  'CAFFEINE-POWERED',
+  'MECHANICAL KEYBOARD',
+  'PIXEL PERFECTIONIST',
+  'COMMITS EVERY DAY',
+  'CLEAN GIT HISTORY',
+  'SHIP EVERY FRIDAY',
 ]
 
 const availability = [
   'OPEN FOR FREELANCE',
+  'REMOTE / HYBRID',
   profile.location,
   profile.email,
-  'RESPON < 24 JAM',
-  'REMOTE / HYBRID',
+  'RESPONSE < 24 HOURS',
 ]
 
 function pill(text) {

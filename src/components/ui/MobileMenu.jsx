@@ -42,7 +42,7 @@ export default function MobileMenu({ open, onClose }) {
       aria-label="Menu navigasi"
     >
       <div className="flex items-center justify-between border-b-3 border-bg px-6 py-4">
-        <span className="font-mono text-base font-bold text-bg">{initials}.dev</span>
+        <span className="font-mono text-base font-bold text-bg">kazuno</span>
         <button
           ref={closeBtnRef}
           onClick={onClose}

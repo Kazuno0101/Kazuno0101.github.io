@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useTheme } from '../../hooks/useTheme.jsx'
 import { useScrollSpy } from '../../hooks/useScrollSpy.js'
 import { useMagnetic } from '../../hooks/useMagnetic.js'
-import { nav, profile } from '../../data/portfolio.js'
+import { nav } from '../../data/portfolio.js'
 import { Sun, Moon, Menu } from 'lucide-react'
 import MobileMenu from '../ui/MobileMenu.jsx'
 
@@ -17,7 +17,6 @@ export default function Navbar() {
   const { isDark, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useScrollSpy(sectionIds)
-  const initials = profile.name.split(' ').map((w) => w[0]).join('').toLowerCase()
 
   return (
     <>
@@ -28,7 +27,7 @@ export default function Navbar() {
             className="font-mono text-base font-bold text-ink dark:text-bg flex items-center gap-2"
           >
             <span className="inline-block h-3 w-3 bg-coral" aria-hidden="true" />
-            {initials}.dev
+            kazuno
           </a>
 
           <div className="flex items-center gap-3 sm:gap-6">

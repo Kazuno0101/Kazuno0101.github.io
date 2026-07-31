@@ -5,7 +5,6 @@ const footerItems = ['THEMES: BRUTALIST', 'BUILT WITH REACT + TAILWIND', profile
 
 export default function Footer() {
   const year = new Date().getFullYear()
-  const initials = profile.name.split(' ').map((w) => w[0]).join('').toLowerCase()
 
   return (
     <footer className="bg-bg dark:bg-ink">
@@ -21,7 +20,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs text-muted dark:text-bg/70">
         <a href="#top" className="font-bold text-ink dark:text-bg hover:text-coral dark:hover:text-amber transition-colors duration-120">
-          {initials}.dev
+          kazuno
         </a>
         <span>
           © {year} {profile.name}. all rights reserved.
