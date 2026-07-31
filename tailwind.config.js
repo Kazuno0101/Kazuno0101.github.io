@@ -7,16 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        'cream': '#FDFBF7',
-        'charcoal': '#2D2D2D',
-        'cool-gray': '#6B7280',
-        'pastel-yellow': '#FFD166',
-        'soft-watermelon': '#EF476F',
-        'soft-blue': '#118AB2',
+        'bg': '#FFFFFF',
+        'ink': '#0A0A0A',
+        'muted': '#6B6B6B',
+        'amber': '#F2B705',
+        'coral': '#E14434',
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'serif'],
-        'sans': ['Quicksand', 'sans-serif'],
+        'sans': ['Inter', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        'mono': ['"JetBrains Mono"', '"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+      },
+      borderWidth: {
+        '3': '3px',
+      },
+      borderRadius: {
+        'none': '0px',
+      },
+      transitionDuration: {
+        '120': '120ms',
       },
     },
   },

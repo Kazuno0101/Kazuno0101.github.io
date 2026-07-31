@@ -6,7 +6,8 @@ export function ThemeProvider({ children }) {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme')
-      return saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (saved) return saved === 'dark'
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
     }
     return false
   })
@@ -22,7 +23,7 @@ export function ThemeProvider({ children }) {
     }
   }, [isDark])
 
-  const toggleTheme = () => setIsDark(!isDark)
+  const toggleTheme = () => setIsDark(prev => !prev)
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
