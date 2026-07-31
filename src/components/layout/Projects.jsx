@@ -1,13 +1,17 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { projects } from '../../data/portfolio.js'
 import Reveal from '../ui/Reveal.jsx'
-import FilterBar from '../ui/FilterBar.jsx'
+import SegmentedToggle from '../ui/SegmentedToggle.jsx'
 import ProjectCard from './ProjectCard.jsx'
 
-const CATEGORIES = [...new Set(projects.map((p) => p.category))]
+const TYPE_OPTIONS = [
+  { value: 'all', label: 'all' },
+  { value: 'client', label: 'client work' },
+  { value: 'personal', label: 'personal' },
+]
 
-function countByCategory(cat) {
-  return projects.filter((p) => p.category === cat).length
+function countByType(type) {
+  return projects.filter((p) => p.type === type).length
 }
 
 // Animated count-up hook.
@@ -30,13 +34,13 @@ function useCountUp(target, visible) {
 }
 
 export default function Projects() {
-  const [active, setActive] = useState('all')
+  const [projectType, setProjectType] = useState('all')
   const [sectionVisible, setSectionVisible] = useState(false)
 
   const filtered = useMemo(() => {
-    if (active === 'all') return projects
-    return projects.filter((p) => p.category === active)
-  }, [active])
+    if (projectType === 'all') return projects
+    return projects.filter((p) => p.type === projectType)
+  }, [projectType])
 
   const projectCount = useCountUp(filtered.length, sectionVisible)
 
@@ -69,7 +73,14 @@ export default function Projects() {
         </Reveal>
 
         <Reveal>
-          <FilterBar categories={CATEGORIES} active={active} onSelect={setActive} countByCategory={countByCategory} />
+          <SegmentedToggle
+            options={TYPE_OPTIONS.map((opt) => ({
+              ...opt,
+              count: opt.value === 'all' ? projects.length : countByType(opt.value),
+            }))}
+            value={projectType}
+            onChange={setProjectType}
+          />
         </Reveal>
 
         <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3 border-3 border-ink dark:border-bg auto-rows-fr">
