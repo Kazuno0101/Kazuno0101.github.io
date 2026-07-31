@@ -33,14 +33,20 @@ function useCountUp(target, visible) {
   return count
 }
 
+const INITIAL_SHOW = 6
+
 export default function Projects() {
   const [projectType, setProjectType] = useState('all')
+  const [expanded, setExpanded] = useState(false)
   const [sectionVisible, setSectionVisible] = useState(false)
 
   const filtered = useMemo(() => {
     if (projectType === 'all') return projects
     return projects.filter((p) => p.type === projectType)
   }, [projectType])
+
+  const displayed = expanded ? filtered : filtered.slice(0, INITIAL_SHOW)
+  const hasMore = filtered.length > INITIAL_SHOW
 
   const projectCount = useCountUp(filtered.length, sectionVisible)
 
@@ -55,6 +61,9 @@ export default function Projects() {
     obs.observe(el)
     return () => obs.disconnect()
   }, [])
+
+  // Reset expanded when type changes
+  useEffect(() => { setExpanded(false) }, [projectType])
 
   return (
     <section id="work" className="border-b-3 border-ink dark:border-bg" ref={sectionRef}>
@@ -72,7 +81,7 @@ export default function Projects() {
           </span>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="flex items-center justify-between flex-wrap gap-4">
           <SegmentedToggle
             options={TYPE_OPTIONS.map((opt) => ({
               ...opt,
@@ -81,10 +90,19 @@ export default function Projects() {
             value={projectType}
             onChange={setProjectType}
           />
+          {hasMore && (
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="btn-pop border-3 border-ink dark:border-bg bg-bg text-ink dark:bg-ink dark:text-bg font-mono text-sm font-bold px-6 py-2.5 hover:bg-ink hover:text-bg dark:hover:bg-bg dark:hover:text-ink transition-colors duration-120"
+            >
+              {expanded ? 'tutup' : `lihat semua (${filtered.length})`}
+            </button>
+          )}
         </Reveal>
 
         <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3 border-3 border-ink dark:border-bg auto-rows-fr">
-          {filtered.map((project, i) => (
+          {displayed.map((project, i) => (
             <ProjectCard
               key={project.id}
               project={project}
