@@ -95,7 +95,6 @@ export const skills = {
 }
 
 export const contact = {
-  prompt: '$ contact',
   headline: 'Punya proyek? Yuk, ngobrol.',
   email: 'kazunonuno@gmail.com',
   socials: [

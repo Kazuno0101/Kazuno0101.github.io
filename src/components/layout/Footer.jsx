@@ -18,7 +18,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs text-muted dark:text-bg/70">
+      <div className="max-w-6xl mx-auto px-6 py-8 safe-x flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs text-muted dark:text-bg/70">
         <a href="#top" className="font-bold text-ink dark:text-bg hover:text-coral dark:hover:text-amber transition-colors duration-120">
           kazuno
         </a>

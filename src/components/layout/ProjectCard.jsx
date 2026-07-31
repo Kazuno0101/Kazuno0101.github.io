@@ -90,7 +90,7 @@ export default function ProjectCard({ project, index }) {
   return (
     <Reveal
       delay={index * 80}
-      className="border-b-3 sm:border-r-3 last:border-r-0 border-ink dark:border-bg"
+      className="border-b-3 sm:border-r-3 last:border-b-0 sm:last:border-b-3 last:border-r-0 border-ink dark:border-bg"
     >
       <article
         className={`card-shift relative flex flex-col gap-4 p-6 h-full border-3 border-ink dark:border-bg ${accent} overflow-hidden`}

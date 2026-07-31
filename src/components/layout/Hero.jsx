@@ -86,16 +86,17 @@ export default function Hero() {
 				<div className='overflow-hidden'>
 					<h1 className='font-display font-extrabold text-ink dark:text-bg leading-[0.9] tracking-tight'>
 						<span
-							className='block text-5xl hero-line sm:text-7xl md:text-8xl'
+							className='block text-[2.75rem] hero-line sm:text-7xl md:text-8xl'
 							style={{ animationDelay: '60ms' }}
 						>
 							{profile.name}
 						</span>
 					</h1>
 					<div className='mt-2 hero-line sm:mt-3'>
-						<span className='block text-coral text-5xl sm:text-7xl md:text-8xl leading-[0.9]'>
+						<span className='block text-coral text-[2.75rem] sm:text-7xl md:text-8xl leading-[0.9]'>
 							{typedRole}
-							<span className='font-mono font-normal'>{caret}</span>Developer
+							<span className='font-mono font-normal'>{caret}</span>
+							<span className='block sm:inline'>Developer</span>
 						</span>
 					</div>
 				</div>

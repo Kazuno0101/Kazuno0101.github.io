@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50 bg-bg/95 dark:bg-ink/95 backdrop-blur-sm border-b-3 border-ink dark:border-bg">
-        <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <nav className="max-w-6xl mx-auto px-6 py-4 safe-x flex items-center justify-between">
           <a
             href="#top"
             className="font-mono text-base font-bold text-ink dark:text-bg flex items-center gap-2"

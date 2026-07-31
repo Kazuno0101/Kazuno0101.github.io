@@ -23,12 +23,6 @@ export default function Contact() {
       <FloatingShape shape="plus" color="bg-lime" size="sm" rotate={-15} className="absolute bottom-24 left-24 hidden lg:block" />
 
       <div className="max-w-6xl mx-auto px-6 py-20 sm:py-32 flex flex-col gap-8">
-        <Reveal>
-          <span className="font-mono text-sm text-ink font-bold">
-            {contact.prompt}
-          </span>
-        </Reveal>
-
         <Reveal delay={80}>
           <h2 className="font-display font-extrabold text-ink text-4xl sm:text-5xl md:text-6xl leading-[0.95] tracking-tight max-w-3xl">
             {contact.headline}
