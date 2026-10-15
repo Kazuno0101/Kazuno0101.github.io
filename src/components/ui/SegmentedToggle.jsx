@@ -1,6 +1,6 @@
-export default function SegmentedToggle({ options, value, onChange }) {
+export default function SegmentedToggle({ options, value, onChange, ariaLabel = 'Filter by type' }) {
   return (
-    <div className="flex flex-wrap border-3 border-ink dark:border-bg" role="radiogroup" aria-label="Filter by type">
+    <div className="flex flex-wrap border-3 border-ink dark:border-bg" role="radiogroup" aria-label={ariaLabel}>
       {options.map((opt, i) => {
         const isActive = value === opt.value
         return (

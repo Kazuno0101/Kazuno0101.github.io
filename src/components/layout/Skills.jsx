@@ -1,15 +1,18 @@
-import { skills } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import Reveal from '../ui/Reveal.jsx'
 import Marquee from '../ui/Marquee.jsx'
 import Sticker from '../ui/Sticker.jsx'
 import FloatingShape from '../ui/FloatingShape.jsx'
 
-// Flatten all skills into one ticker stream
-const allSkills = skills.groups.flatMap((g) => g.items)
-
 const panelTints = ['bg-amber text-ink', 'bg-blue text-ink', 'bg-lime text-ink']
 
 export default function Skills() {
+  const { t } = useLocale()
+  const skills = t.skills
+
+  // Di dalam komponen supaya ikut re-render saat locale berganti.
+  const allSkills = skills.groups.flatMap((g) => g.items)
+
   return (
     <section id="skills" className="border-b-3 border-ink dark:border-bg relative">
       {/* decorative elements */}
@@ -22,7 +25,7 @@ export default function Skills() {
             {skills.prompt}
           </span>
           <h2 className="font-display font-extrabold text-ink dark:text-bg text-3xl sm:text-4xl tracking-tight">
-            tech stack
+            {t.ui.skillsSection.heading}
           </h2>
         </Reveal>
 
@@ -34,7 +37,7 @@ export default function Skills() {
             reverse
             pauseOnHover
             reactToScroll
-            className="py-4 font-display font-bold text-2xl text-ink"
+            className="py-4 font-display font-bold text-lg sm:text-2xl text-ink"
           />
         </Reveal>
 

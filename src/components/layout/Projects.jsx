@@ -1,18 +1,8 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
-import { projects } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import Reveal from '../ui/Reveal.jsx'
 import SegmentedToggle from '../ui/SegmentedToggle.jsx'
 import ProjectCard from './ProjectCard.jsx'
-
-const TYPE_OPTIONS = [
-  { value: 'all', label: 'all' },
-  { value: 'client', label: 'client work' },
-  { value: 'personal', label: 'personal' },
-]
-
-function countByType(type) {
-  return projects.filter((p) => p.type === type).length
-}
 
 // Animated count-up hook.
 function useCountUp(target, visible) {
@@ -36,6 +26,8 @@ function useCountUp(target, visible) {
 const INITIAL_SHOW = 6
 
 export default function Projects() {
+  const { t } = useLocale()
+  const projects = t.projects
   const [projectType, setProjectType] = useState('all')
   const [expanded, setExpanded] = useState(false)
   const [sectionVisible, setSectionVisible] = useState(false)
@@ -43,7 +35,7 @@ export default function Projects() {
   const filtered = useMemo(() => {
     if (projectType === 'all') return projects
     return projects.filter((p) => p.type === projectType)
-  }, [projectType])
+  }, [projectType, projects])
 
   const displayed = expanded ? filtered : filtered.slice(0, INITIAL_SHOW)
   const hasMore = filtered.length > INITIAL_SHOW
@@ -65,6 +57,13 @@ export default function Projects() {
   // Reset expanded when type changes
   useEffect(() => { setExpanded(false) }, [projectType])
 
+  const filterOptions = t.ui.projectsSection.filters.map((opt) => ({
+    ...opt,
+    count: opt.value === 'all'
+      ? projects.length
+      : projects.filter((p) => p.type === opt.value).length,
+  }))
+
   return (
     <section id="work" className="border-b-3 border-ink dark:border-bg" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6 py-16 sm:py-24 flex flex-col gap-10">
@@ -74,7 +73,7 @@ export default function Projects() {
             // work
           </span>
           <h2 className="font-display font-extrabold text-ink dark:text-bg text-3xl sm:text-4xl tracking-tight">
-            proyek terpilih
+            {t.ui.projectsSection.heading}
           </h2>
           <span className="font-mono text-sm font-bold bg-amber text-ink border-2 border-ink px-3 py-1">
             {String(projectCount).padStart(2, '0')}
@@ -83,12 +82,10 @@ export default function Projects() {
 
         <Reveal className="flex items-center justify-between flex-wrap gap-4">
           <SegmentedToggle
-            options={TYPE_OPTIONS.map((opt) => ({
-              ...opt,
-              count: opt.value === 'all' ? projects.length : countByType(opt.value),
-            }))}
+            options={filterOptions}
             value={projectType}
             onChange={setProjectType}
+            ariaLabel={t.ui.projectsSection.ariaFilter}
           />
           {hasMore && (
             <button
@@ -96,7 +93,9 @@ export default function Projects() {
               onClick={() => setExpanded((v) => !v)}
               className="btn-pop border-3 border-ink dark:border-bg bg-bg text-ink dark:bg-ink dark:text-bg font-mono text-sm font-bold px-6 py-2.5 hover:bg-ink hover:text-bg dark:hover:bg-bg dark:hover:text-ink transition-colors duration-120"
             >
-              {expanded ? 'tutup' : `lihat semua (${filtered.length})`}
+              {expanded
+                ? t.ui.projectsSection.close
+                : t.ui.projectsSection.showAll.replace('{n}', filtered.length)}
             </button>
           )}
         </Reveal>

@@ -1,9 +1,10 @@
 import { useState, useCallback } from 'react'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import { projectAccent } from '../../data/portfolio.js'
 import Reveal from '../ui/Reveal.jsx'
 
 // Per-card detail overlay: toggled on click, slides in from right.
-function CardDetail({ project, isOpen }) {
+function CardDetail({ project, isOpen, card }) {
   return (
     <div
       className={`absolute inset-0 z-10 flex flex-col justify-between p-6 transition-all duration-150 ${
@@ -17,17 +18,17 @@ function CardDetail({ project, isOpen }) {
         <button
           type="button"
           className="self-end font-mono text-xs font-bold border-2 border-current px-2 py-1 opacity-70 hover:opacity-100 transition-opacity duration-120"
-          aria-label="Close detail"
+          aria-label={card.closeAria}
           tabIndex={isOpen ? 0 : -1}
         >
-          ESC / click back
+          {card.closeDetail}
         </button>
 
         <span className="font-mono text-xs opacity-80 font-bold">
-          {project.id} / detail
+          {project.id} / {card.detail}
         </span>
 
-        <h3 className="font-display font-bold text-2xl leading-tight">
+        <h3 className="font-display font-bold text-xl sm:text-2xl leading-tight">
           {project.title}
         </h3>
 
@@ -81,6 +82,8 @@ function CardDetail({ project, isOpen }) {
 }
 
 export default function ProjectCard({ project, index }) {
+  const { t } = useLocale()
+  const card = t.ui.card
   const accent = projectAccent[project.category] || projectAccent.tool
   const [expanded, setExpanded] = useState(false)
 
@@ -98,21 +101,21 @@ export default function ProjectCard({ project, index }) {
         role="button"
         tabIndex={0}
         aria-expanded={expanded}
-        aria-label={`${project.title}${expanded ? ' (detail view)' : ''}`}
+        aria-label={`${project.title}${expanded ? card.detailAria : ''}`}
         onKeyDown={(e) => { if (e.key === 'Escape') close(); if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle() } }}
       >
         {/* Front face */}
         <div className={`flex flex-col gap-4 flex-1 transition-all duration-150 ${expanded ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100'}`}>
           <div className="flex items-center justify-between">
             <span className="font-mono text-xs opacity-80 font-bold">
-              {project.id} / project
+              {project.id} / {card.project}
             </span>
             <span className="font-mono text-xs opacity-80 uppercase border-2 border-current px-2 py-0.5">
               {project.category}
             </span>
           </div>
 
-          <h3 className="font-display font-bold text-2xl leading-tight">
+          <h3 className="font-display font-bold text-xl sm:text-2xl leading-tight">
             {project.title}
           </h3>
 
@@ -160,12 +163,12 @@ export default function ProjectCard({ project, index }) {
 
           {/* Expand hint */}
           <div className="flex items-center gap-2 mt-1 font-mono text-[10px] text-muted dark:text-bg/50">
-            <span className="border border-current px-1.5 py-0.5">click to expand</span>
+            <span className="border border-current px-1.5 py-0.5">{card.expand}</span>
           </div>
         </div>
 
         {/* Expanded detail overlay */}
-        <CardDetail project={project} isOpen={expanded} />
+        <CardDetail project={project} isOpen={expanded} card={card} />
       </article>
     </Reveal>
   )

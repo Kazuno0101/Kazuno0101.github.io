@@ -1,10 +1,15 @@
-import { profile } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import Marquee from '../ui/Marquee.jsx'
 
-const footerItems = ['THEMES: BRUTALIST', 'BUILT WITH REACT + TAILWIND', profile.email, profile.role]
-
 export default function Footer() {
+  const { t } = useLocale()
   const year = new Date().getFullYear()
+
+  // Di dalam komponen supaya ikut re-render saat locale berganti.
+  const footerItems = [...t.ui.footer.items, t.profile.email, t.profile.role]
+  const rights = t.ui.footer.rights
+    .replace('{year}', year)
+    .replace('{name}', t.profile.name)
 
   return (
     <footer className="bg-bg dark:bg-ink">
@@ -22,14 +27,12 @@ export default function Footer() {
         <a href="#top" className="font-bold text-ink dark:text-bg hover:text-coral dark:hover:text-amber transition-colors duration-120">
           kazuno
         </a>
-        <span>
-          © {year} {profile.name}. all rights reserved.
-        </span>
+        <span>{rights}</span>
         <a
           href="#top"
           className="btn-pop border-3 border-ink dark:border-bg bg-blue px-3 py-2 text-ink hover:bg-ink hover:text-bg"
         >
-          back to top ↑
+          {t.ui.footer.backToTop}
         </a>
       </div>
     </footer>

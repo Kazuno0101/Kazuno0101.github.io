@@ -1,23 +1,5 @@
-import { profile } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import Marquee from '../ui/Marquee.jsx'
-
-// Two-row ticker wall between Projects and Skills.
-const facts = [
-  'CAFFEINE-POWERED',
-  'MECHANICAL KEYBOARD',
-  'PIXEL PERFECTIONIST',
-  'COMMITS EVERY DAY',
-  'CLEAN GIT HISTORY',
-  'SHIP EVERY FRIDAY',
-]
-
-const availability = [
-  'OPEN FOR FREELANCE',
-  'REMOTE / HYBRID',
-  profile.location,
-  profile.email,
-  'RESPONSE < 24 HOURS',
-]
 
 function pill(text) {
   return (
@@ -27,16 +9,29 @@ function pill(text) {
   )
 }
 
+// Two-row ticker wall between Projects and Skills.
 export default function TickerWall() {
+  const { t } = useLocale()
+  const { facts, availabilitySuffix } = t.ui.tickerWall
+
+  // Di dalam komponen supaya ikut re-render saat locale berganti.
+  const availability = [
+    availabilitySuffix[0],
+    availabilitySuffix[1],
+    t.profile.location,
+    t.profile.email,
+    availabilitySuffix[2],
+  ]
+
   return (
-    <section aria-label="ticker wall" className="border-b-3 border-ink dark:border-bg overflow-hidden">
+    <section aria-label={t.ui.tickerWall.aria} className="border-b-3 border-ink dark:border-bg overflow-hidden">
       {/* Row 1: fun facts — leftward, on coral */}
       <div className="border-b-3 border-ink dark:border-bg bg-coral py-4">
         <Marquee
           items={facts.map(pill)}
           duration={26}
           separator="✦"
-          className="text-ink text-xl"
+          className="text-ink text-sm sm:text-xl"
         />
       </div>
 
@@ -47,7 +42,7 @@ export default function TickerWall() {
           duration={24}
           reverse
           separator="●"
-          className="text-ink text-lg"
+          className="text-ink text-sm sm:text-lg"
         />
       </div>
     </section>

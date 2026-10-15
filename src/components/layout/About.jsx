@@ -1,4 +1,4 @@
-import { about } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import Reveal from '../ui/Reveal.jsx'
 import Sticker from '../ui/Sticker.jsx'
 import FloatingShape from '../ui/FloatingShape.jsx'
@@ -6,6 +6,9 @@ import FloatingShape from '../ui/FloatingShape.jsx'
 const yearColors = ['text-coral', 'text-blue', 'text-pink']
 
 export default function About() {
+  const { t } = useLocale()
+  const about = t.about
+
   return (
     <section id="about" className="border-b-3 border-ink dark:border-bg relative">
       {/* sticker + floating shapes */}

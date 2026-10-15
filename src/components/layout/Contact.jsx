@@ -1,4 +1,4 @@
-import { contact } from '../../data/portfolio.js'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import { useMagnetic } from '../../hooks/useMagnetic.js'
 import Reveal from '../ui/Reveal.jsx'
 import Sticker from '../ui/Sticker.jsx'
@@ -10,6 +10,9 @@ function MagneticA({ children, ...props }) {
 }
 
 export default function Contact() {
+  const { t } = useLocale()
+  const contact = t.contact
+
   return (
     <section id="contact" className="border-b-3 border-ink dark:border-bg bg-amber relative overflow-hidden">
       {/* stickers cluster — bottom-right */}
@@ -24,7 +27,7 @@ export default function Contact() {
 
       <div className="max-w-6xl mx-auto px-6 py-20 sm:py-32 flex flex-col gap-8">
         <Reveal delay={80}>
-          <h2 className="font-display font-extrabold text-ink text-4xl sm:text-5xl md:text-6xl leading-[0.95] tracking-tight max-w-3xl">
+          <h2 className="font-display font-extrabold text-ink text-3xl sm:text-5xl md:text-6xl leading-[0.95] tracking-tight max-w-3xl">
             {contact.headline}
           </h2>
         </Reveal>

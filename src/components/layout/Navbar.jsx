@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useTheme } from '../../hooks/useTheme.jsx'
+import { useLocale } from '../../hooks/useLocale.jsx'
 import { useScrollSpy } from '../../hooks/useScrollSpy.js'
 import { useMagnetic } from '../../hooks/useMagnetic.js'
-import { nav } from '../../data/portfolio.js'
-import { Sun, Moon, Menu } from 'lucide-react'
+import { generateCv } from '../../utils/generateCv.js'
+import { Sun, Moon, Menu, Download } from 'lucide-react'
 import MobileMenu from '../ui/MobileMenu.jsx'
+import LanguageToggle from '../ui/LanguageToggle.jsx'
 
 const sectionIds = ['top', 'about', 'work', 'skills', 'contact']
 
@@ -15,6 +17,7 @@ function MagneticButton({ children, ...props }) {
 
 export default function Navbar() {
   const { isDark, toggleTheme } = useTheme()
+  const { locale, t } = useLocale()
   const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useScrollSpy(sectionIds)
 
@@ -30,9 +33,9 @@ export default function Navbar() {
             kazuno
           </a>
 
-          <div className="flex items-center gap-3 sm:gap-6">
+          <div className="flex items-center gap-2 sm:gap-4">
             <ul className="hidden sm:flex items-center gap-6 font-mono text-sm">
-              {nav.map((item) => {
+              {t.nav.map((item) => {
                 const isActive = activeId === item.href.slice(1)
                 return (
                   <li key={item.href}>
@@ -51,18 +54,29 @@ export default function Navbar() {
             </ul>
 
             <MagneticButton
+              onClick={() => generateCv(locale)}
+              aria-label={t.ui.navbar.downloadCv}
+              title={t.ui.navbar.downloadCv}
+              className="btn-pop border-3 border-ink dark:border-bg bg-amber p-3 text-ink hover:bg-ink hover:text-bg dark:hover:bg-bg dark:hover:text-ink"
+            >
+              <Download size={18} />
+            </MagneticButton>
+
+            <LanguageToggle />
+
+            <MagneticButton
               onClick={toggleTheme}
-              aria-label={isDark ? 'Aktifkan light mode' : 'Aktifkan dark mode'}
-              className="btn-pop border-3 border-ink dark:border-bg bg-blue p-3 text-ink dark:text-ink hover:bg-ink hover:text-bg"
+              aria-label={isDark ? t.ui.navbar.themeLight : t.ui.navbar.themeDark}
+              className="btn-pop border-3 border-ink dark:border-bg bg-blue p-3 text-ink dark:text-ink hover:bg-ink hover:text-bg dark:hover:bg-bg dark:hover:text-ink"
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </MagneticButton>
 
             <MagneticButton
               onClick={() => setMenuOpen(true)}
-              aria-label="Buka menu"
+              aria-label={t.ui.navbar.openMenu}
               aria-expanded={menuOpen}
-              className="sm:hidden btn-pop border-3 border-ink dark:border-bg bg-pink p-3 text-ink dark:text-ink hover:bg-ink hover:text-bg"
+              className="sm:hidden btn-pop border-3 border-ink dark:border-bg bg-pink p-3 text-ink dark:text-ink hover:bg-ink hover:text-bg dark:hover:bg-bg dark:hover:text-ink"
             >
               <Menu size={18} />
             </MagneticButton>

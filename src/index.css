@@ -299,85 +299,89 @@ html.dark .grain-overlay {
 }
 
 /* ============ Floating shapes ============ */
-.floating-shape {
-  display: block;
-  border: 3px solid var(--color-ink);
-  box-shadow: 3px 3px 0 var(--hard-shadow);
-  transform: rotate(var(--shape-rotate, 0deg));
-  pointer-events: none;
-}
+/* Layered under utilities so `hidden` / `lg:block` display utilities can
+   override the base `display: block` (Tailwind v4 cascade layers). */
+@layer components {
+  .floating-shape {
+    display: block;
+    border: 3px solid var(--color-ink);
+    box-shadow: 3px 3px 0 var(--hard-shadow);
+    transform: rotate(var(--shape-rotate, 0deg));
+    pointer-events: none;
+  }
 
-.floating-shape-square {
-  /* default rectangle — no extra styles */
-}
+  .floating-shape-square {
+    /* default rectangle — no extra styles */
+  }
 
-.floating-shape-circle {
-  border-radius: 9999px !important;
-}
+  .floating-shape-circle {
+    border-radius: 9999px !important;
+  }
 
-.floating-shape-cross::before,
-.floating-shape-cross::after {
-  content: '';
-  position: absolute;
-  background-color: var(--color-ink);
-}
+  .floating-shape-cross::before,
+  .floating-shape-cross::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-ink);
+  }
 
-.floating-shape-cross::before {
-  width: 60%;
-  height: 3px;
-  top: 50%;
-  left: 20%;
-  transform: translateY(-50%);
-}
+  .floating-shape-cross::before {
+    width: 60%;
+    height: 3px;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+  }
 
-.floating-shape-cross::after {
-  width: 3px;
-  height: 60%;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .floating-shape-cross::after {
+    width: 3px;
+    height: 60%;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.floating-shape-plus::before,
-.floating-shape-plus::after {
-  content: '';
-  position: absolute;
-  background-color: var(--color-ink);
-}
+  .floating-shape-plus::before,
+  .floating-shape-plus::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-ink);
+  }
 
-.floating-shape-plus::before {
-  width: 40%;
-  height: 3px;
-  top: 50%;
-  left: 30%;
-  transform: translateY(-50%);
-}
+  .floating-shape-plus::before {
+    width: 40%;
+    height: 3px;
+    top: 50%;
+    left: 30%;
+    transform: translateY(-50%);
+  }
 
-.floating-shape-plus::after {
-  width: 3px;
-  height: 40%;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .floating-shape-plus::after {
+    width: 3px;
+    height: 40%;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.floating-shape-triangle {
-  width: 0 !important;
-  height: 0 !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  border-left: solid transparent;
-  border-right: solid transparent;
-  border-bottom-style: solid;
-  border-bottom-color: var(--color-ink);
-  /* Override w/h from size classes for triangle */
-}
+  .floating-shape-triangle {
+    width: 0 !important;
+    height: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    border-left: solid transparent;
+    border-right: solid transparent;
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-ink);
+    /* Override w/h from size classes for triangle */
+  }
 
-.floating-shape-ring {
-  border-radius: 9999px !important;
-  background-color: transparent !important;
-  border: 3px solid var(--color-ink);
+  .floating-shape-ring {
+    border-radius: 9999px !important;
+    background-color: transparent !important;
+    border: 3px solid var(--color-ink);
+  }
 }
 
 /* ============ Easter egg overlay ============ */
